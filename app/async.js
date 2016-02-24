@@ -6,5 +6,12 @@ exports.asyncAnswers = {
   },
 
   manipulateRemoteData : function(url) {
+    return new Promise(function(resolve, reject) {
+      $.ajax(url).then(function(data) {
+        resolve(data.people.map(function(person) {
+          return person.name;
+        }).sort())
+      })
+    })
   }
 };
