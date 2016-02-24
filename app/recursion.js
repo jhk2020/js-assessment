@@ -3,8 +3,23 @@ exports = (typeof window === 'undefined') ? global : window;
 exports.recursionAnswers = {
   listFiles: function(data, dirName) {
     var result = [];
+    var dirPath = [];
     function recurse(directory) {
+      dirPath.push(directory.dir);
+      for (var i = 0; i < directory.files.length; i++) {
+        if (typeof directory.files[i] === 'object') {
+          recurse(directory.files[i]);
+          dirPath.pop();
+        } else {
+          var index = dirPath.indexOf(dirName);
+          if (index > -1 || !dirName) {
+            result.push(directory.files[i]);
+          }
+        }
+      }
     }
+    recurse(data);
+    return result;
   },
 
   permute: function(arr) {
@@ -51,7 +66,6 @@ exports.recursionAnswers = {
       }
     }
     recurse('', 0, 0);
-    console.log(result)
     return result;
   }
 };
