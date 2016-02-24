@@ -24,7 +24,7 @@ describe('async behavior', function() {
       expect(flag).to.eql('success');
       finish(done);
     });
-
+    
     expect(flag).to.eql(false);
   });
 
