@@ -37,6 +37,21 @@ exports.recursionAnswers = {
   },
 
   validParentheses: function(n) {
-
+    var result = [];
+    function recurse(str, leftParans, rightParans) {
+      if (rightParans === n && leftParans === n) {
+        result.push(str);
+      } else {
+        if (leftParans < n) {
+          recurse(str + '(', leftParans + 1, rightParans);
+        }
+        if (rightParans < leftParans) {
+          recurse(str + ')', leftParans, rightParans + 1);
+        }
+      }
+    }
+    recurse('', 0, 0);
+    console.log(result)
+    return result;
   }
 };
