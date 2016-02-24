@@ -10,6 +10,10 @@ exports.objectsAnswers =  {
   },
 
   iterate : function(obj) {
-
+    var result = [];
+    Object.getOwnPropertyNames(obj).forEach(function(key) {
+      result.push(key + ': ' + obj[key]);
+    });
+    return result;
   }
 };
